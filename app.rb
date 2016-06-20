@@ -44,7 +44,7 @@ class HangpersonApp < Sinatra::Base
     begin
       flash[:message] = "You have already used that letter." unless @game.guess(letter)
     rescue
-      flash[:message] = "Invalid character!"    # invalid character raises ArgumentError
+      flash[:message] = "Invalid guess."    # invalid character raises ArgumentError
     end
     flash[:message] = "Invalid guess." unless t == @game.wrong_guesses
     redirect '/show'
