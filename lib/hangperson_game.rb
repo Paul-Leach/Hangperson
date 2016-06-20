@@ -26,10 +26,9 @@ class HangpersonGame
      (letter.length > 1) || (letter =~ /[a-zA-Z]/) != 0
     
     letter.downcase!
+    # return false if repeated guess; doesn't count toward bad guesses
+    return false if @guesses.include?(letter) || @wrong_guesses.include?(letter)
     if @word.include? letter
-      if @guesses.include? letter
-        return false
-      end
       @guesses += letter
       #  every letter of @word not in @guesses to "-" and set to @word_with_guesses
       p = Regexp.new("[^"+@guesses+"]")
@@ -37,9 +36,6 @@ class HangpersonGame
       return true
     else
       @bad_guess_count += 1
-      if @wrong_guesses.include? letter
-        return false
-      end
       @wrong_guesses += letter
       return true
     end
